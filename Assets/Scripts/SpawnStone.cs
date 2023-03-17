@@ -6,23 +6,28 @@ using Random = UnityEngine.Random;
 
 public class SpawnStone : MonoBehaviour
 {
-    private int[] _horizontallyStone = new int [2] ;
-    [SerializeField] private GameObject _stone;
-    
+    private int[] _horizontallyStoneArrey = new int [2] ;
+    private GameObject _stone;
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1)) StoneSpawn(_stone);
+       // if (Input.GetMouseButtonDown(1)) StoneSpawn();
     }
 
-    public void StoneSpawn(GameObject stone)
+    public void StoneSpawn()
     {
-        for (int i = 1; i < 6; i++)
+        if (_stone == null)
+        {
+            _stone = GameMenejer.instance._stone;
+        }
+        
+        for (int i = 1; i < 5; i++)
         {
             HorizontallyStone();
-            Instantiate(stone, new Vector3(_horizontallyStone[0],0,i), Quaternion.identity);
-            Instantiate(stone, new Vector3(_horizontallyStone[0],0,i+7), Quaternion.identity);
-            Instantiate(stone, new Vector3(_horizontallyStone[1],0,i), Quaternion.identity);
-            Instantiate(stone, new Vector3(_horizontallyStone[1],0,i+7), Quaternion.identity);
+            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i), Quaternion.identity);
+            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i+8), Quaternion.identity);
+            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i), Quaternion.identity);
+            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i+8), Quaternion.identity);
         }
         
     }
@@ -35,14 +40,10 @@ public class SpawnStone : MonoBehaviour
         while (distance < 2 || distance > 4)
         {
             secondStone = Random.Range(0, 8);
-            distance = firstStone - secondStone;
-            if (distance < 0)
-            {
-                distance = distance * -1;
-            }
+            distance = Mathf.Abs(firstStone - secondStone)-1;
         }
 
-        _horizontallyStone[0] = firstStone;
-        _horizontallyStone[1] = secondStone;
+        _horizontallyStoneArrey[0] = firstStone;
+        _horizontallyStoneArrey[1] = secondStone;
     }
 }

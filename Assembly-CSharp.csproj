@@ -41,11 +41,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ClickReceiver.cs" />
+     <Compile Include="Assets\Scripts\HorizontallyFifthStonePlayer.cs" />
      <Compile Include="Assets\Scripts\SpawnStone.cs" />
      <Compile Include="Assets\Scripts\GameEntity.cs" />
      <Compile Include="Assets\Scripts\GameMenejer.cs" />
+     <Compile Include="Assets\Scripts\HorizontallyFifthStoneEnemy.cs" />
+     <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityPlayer.cs" />
+     <Compile Include="Assets\Scripts\SpawnEntety\RowEntety.cs" />
+     <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityEnemy.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Scripts" />
+     <Folder Include="Assets\Scripts\SpawnEntety" />
      <Folder Include="Assets\Materials" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Prefab" />
