@@ -12,7 +12,9 @@ public class RowEntety : MonoBehaviour
         if (_entetyArrey[horizontal] == null)
         {
             var pos = new Vector3(horizontal, 0.7f, _vertically);
-            _entetyArrey[horizontal] = Instantiate(GameMenejer.instance._stone, pos, Quaternion.identity);
+            GameMenejer.instance.dataCell[_vertically,horizontal] = _entetyArrey[horizontal] = Instantiate(GameMenejer.instance._enemy, pos, Quaternion.identity);
+            _entetyArrey[horizontal].GetComponent<VarreorEntety>().strength = horizontal + 1;
+            _entetyArrey[horizontal].GetComponent<VarreorEntety>().Strength();
             var stone = _entetyArrey[horizontal];
             stone.transform.SetParent(GameMenejer.instance._rowEntetyPlayr);
             _filledCells++;
@@ -26,6 +28,7 @@ public class RowEntety : MonoBehaviour
         if (_filledCells == 8)
         {
             _filledCells = 0;
+            _entetyArrey = new GameObject[8];
             return 1;
         }
         return 0;

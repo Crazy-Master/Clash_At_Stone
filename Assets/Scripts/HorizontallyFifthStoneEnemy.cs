@@ -34,7 +34,7 @@ public class HorizontallyFifthStoneEnemy : MonoBehaviour
         _canPut = HorizontallyStone((int)pos.x);
         if (_canPut == true)
         {
-            var Stone = Instantiate(GameMenejer.instance._stone, pos, Quaternion.identity);
+            GameMenejer.instance.dataCell[(int)pos.z,(int)pos.x] = Instantiate(GameMenejer.instance._stone, pos, Quaternion.identity);
         }
         else
         {

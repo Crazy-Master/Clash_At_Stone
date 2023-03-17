@@ -24,10 +24,11 @@ public class SpawnStone : MonoBehaviour
         for (int i = 1; i < 5; i++)
         {
             HorizontallyStone();
-            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i), Quaternion.identity);
-            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i+8), Quaternion.identity);
-            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i), Quaternion.identity);
-            Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i+8), Quaternion.identity);
+            var asd = GameMenejer.instance.dataCell;
+           asd[i,_horizontallyStoneArrey[0]] = Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i), Quaternion.identity);
+           asd[i+8,_horizontallyStoneArrey[0]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i+8), Quaternion.identity);
+           asd[i,_horizontallyStoneArrey[1]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i), Quaternion.identity);
+           asd[i+8,_horizontallyStoneArrey[1]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i+8), Quaternion.identity);
         }
         
     }

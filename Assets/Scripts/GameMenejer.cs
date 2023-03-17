@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameMenejer : MonoBehaviour
 {
    public static GameMenejer instance;
-   public GameEntity[,] dataCell;
+   public GameObject[,] dataCell = new GameObject[14,8];
    public GameObject _stone;
    public GameObject _enemy;
    public Transform _rowEntetyEnemy;
@@ -43,19 +44,19 @@ public class GameMenejer : MonoBehaviour
          Destroy(gameObject);
       }
       DontDestroyOnLoad(gameObject);
-      dataCell = new GameEntity[8,14];
-
    }
 
    private void FixedUpdate()
    {
-      FirstPhase();
+      if (_step < 5)
+      {
+         FirstPhase();
+      }
+      
    }
 
    private void FirstPhase()
    {
-      if (_step == 5) return;
-      
       if (_step == 0) //ставится 1-4 ряд стен
       {
          _spawnStoneFirst.StoneSpawn();
