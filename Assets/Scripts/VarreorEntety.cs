@@ -13,4 +13,9 @@ public class VarreorEntety : MonoBehaviour
        var strText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
        strText.text = strength.ToString();
     }
+
+    public void Muving()
+    {
+        
+    }
 }
