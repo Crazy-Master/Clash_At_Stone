@@ -16,7 +16,7 @@ public class GameMenejer : MonoBehaviour
 
    public bool _fifthStone;
    
-   
+   // первая фаза
    [SerializeField] private RowEntety _spawnEnemy;
    [SerializeField] private SpawnStone _spawnStoneFirst;
    [SerializeField] private HorizontallyFifthStonePlayer _spawnStoneFifthBot;
@@ -24,6 +24,9 @@ public class GameMenejer : MonoBehaviour
    [SerializeField] private RowEntety _rowPlayer;
    private SpawnPointEntityPlayer[] _spawnPlayer;
    private ClickReceiver[] _clickReceivers;
+   
+   [SerializeField] private TimerPlayer _timerPlayer;
+   [SerializeField] private TimerWaiting _timerWaiting;
    
    //вторая фаза
    
@@ -133,38 +136,57 @@ public class GameMenejer : MonoBehaviour
       }
    }
    
+ 
    private void SecondPhase()
    {
       if (_step == 5)
       {
          MuvePlayerOn();
+         if (_timerPlayer.Timer() == 1)
+         {
+            _movementButtons.ButtonsMovement();
+            _timerPlayer.TimerRemove();
+            MuvePlayerOff();
+         }
+         return;
       }
 
       if (_step == 6)
       {
          MuveEnemy();
+         return;
       }
 
       if (_step == 7)
       {
          MuvePlayerOn();
+         if (_timerPlayer.Timer() == 1)
+         {
+            _movementButtons.ButtonsMovement();
+            _timerPlayer.TimerRemove();
+            MuvePlayerOff();
+         }
+         return;
       }
 
       if (_step == 8)
       {
          MuveEnemy();
+         return;
       }
       
       if (_step == 9)
       {
          _movementButtons.ButtonsMovement();
          _step++;
+         return;
       }
       
       if (_step == 10)
       {
          _movementButtons.ButtonsMovement();
          _step++;
+         return;
       }
       
       if (_step == 11)
