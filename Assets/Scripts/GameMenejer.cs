@@ -145,7 +145,6 @@ public class GameMenejer : MonoBehaviour
          if (_timerPlayer.Timer() == 1)
          {
             _movementButtons.ButtonsMovement();
-            _timerPlayer.TimerRemove();
             MuvePlayerOff();
          }
          return;
@@ -163,7 +162,6 @@ public class GameMenejer : MonoBehaviour
          if (_timerPlayer.Timer() == 1)
          {
             _movementButtons.ButtonsMovement();
-            _timerPlayer.TimerRemove();
             MuvePlayerOff();
          }
          return;
@@ -210,6 +208,7 @@ public class GameMenejer : MonoBehaviour
          _movingButton.gameObject.SetActive(false);
          _rightBatton.gameObject.SetActive(false);
          _leftButton.gameObject.SetActive(false);
+         _timerPlayer.TimerRemove();
          _step++;
       }
    }

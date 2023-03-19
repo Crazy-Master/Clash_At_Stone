@@ -13,5 +13,7 @@ public class SpawnPointEntityEnemy : MonoBehaviour
         {
             _rowEntety.SpawnEntety(i);
         }
+
+        _rowEntety.ArrayIsFilled();
     }
 }
