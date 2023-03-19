@@ -35,6 +35,12 @@ public class GameMenejer : MonoBehaviour
    [SerializeField] private RightBatton _rightBatton;
    [SerializeField] private LeftButton _leftButton;
    [SerializeField] private MovingButton _movingButton;
+   
+   //счетчик раундов
+   [SerializeField] private RoundCounter _roundCounter;
+   
+   //кнопка даллее
+   [SerializeField] private GameObject _nextButton;
       
       private int _step;
 
@@ -59,16 +65,21 @@ public class GameMenejer : MonoBehaviour
 
    private void FixedUpdate()
    {
+
       if (_step < 5)
       {
          FirstPhase();
       }
 
-      if (_step > 4 && _step < 9)
+      if (_step > 4 && _step < 12)
       {
          SecondPhase();
       }
-      
+
+      // if (_step == 12)
+      // {
+      //    DestroyObject();
+      // }
    }
 
    private void FirstPhase()
@@ -143,6 +154,25 @@ public class GameMenejer : MonoBehaviour
       {
          MuveEnemy();
       }
+      
+      if (_step == 9)
+      {
+         _movementButtons.ButtonsMovement();
+         _step++;
+      }
+      
+      if (_step == 10)
+      {
+         _movementButtons.ButtonsMovement();
+         _step++;
+      }
+      
+      if (_step == 11)
+      {
+         Battle();
+         _step++;
+         _nextButton.SetActive(true);
+      }
    }
 
    private void MuvePlayerOn()
@@ -150,7 +180,6 @@ public class GameMenejer : MonoBehaviour
       _movingButton.gameObject.SetActive(true);
       _rightBatton.gameObject.SetActive(true);
       _leftButton.gameObject.SetActive(true);
-      Debug.Log("1");
 
    }
    public void MuvePlayerOff()
@@ -160,14 +189,67 @@ public class GameMenejer : MonoBehaviour
          _rightBatton.gameObject.SetActive(false);
          _leftButton.gameObject.SetActive(false);
          _step++;
-         Debug.Log("2");
       }
    }
    private void MuveEnemy()
    {
       int x = Random.Range(-1,2);
       _horizontalMovement.HorizontalButtons(x);
+      _horizontalMovement.HorizontalButtons(x);
       _movementButtons.ButtonsMovement();
       _step++;
+   }
+
+   private void Battle()
+   {
+      var powerPlaer = 0;
+      var powerEnemy = 0;
+      for (int i = 0; i < 8; i++)
+      {
+         if (dataCell[6, i] != null)
+         {
+            powerPlaer = powerPlaer + dataCell[6, i].GetComponent<VarreorEntety>().strength;
+         }
+         if (dataCell[7, i] != null)
+         {
+            powerEnemy = powerEnemy + dataCell[7, i].GetComponent<VarreorEntety>().strength;
+         }
+      }
+
+      if (powerPlaer > powerEnemy)
+      {
+         Debug.Log("победил Plaer");
+         _roundCounter.Counter(1); //1- победил игрок, 2- победил врак, 3- ничья
+         return;
+      }
+
+      if (powerPlaer < powerEnemy)
+      {
+         Debug.Log("победил Enemy");
+         _roundCounter.Counter(2);
+         return;
+      }
+      Debug.Log("ничья");
+      _roundCounter.Counter(3);
+   }
+
+   public void DestroyObject()
+   {
+      _step = 0;
+      for (int z = 0; z < 14; z++)
+      {
+         for (int x = 0; x < 8; x++)
+         {
+            if (dataCell[z,x] != null)
+            {
+               Destroy(dataCell[z,x]);
+            }
+         }
+      }
+
+      _horizontalMovement.transform.position = new Vector3(0, 0, 0);
+      _roundCounter.ResetColor();  // сброс цветов с счетчика раундов
+      dataCell = new GameObject[14, 8];
+      _nextButton.SetActive(false);
    }
 }
