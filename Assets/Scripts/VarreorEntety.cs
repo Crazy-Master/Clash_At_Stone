@@ -14,8 +14,8 @@ public class VarreorEntety : MonoBehaviour
        strText.text = strength.ToString();
     }
 
-    public void Muving()
+    public void Muving(int z)
     {
-        
+        gameObject.transform.position = gameObject.transform.position + new Vector3(0, 0, z);
     }
 }

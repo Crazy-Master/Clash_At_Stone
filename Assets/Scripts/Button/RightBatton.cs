@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class RightBatton : MonoBehaviour
+public class RightBatton : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private HorizontalMovement _horizontalMovement;
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        if (eventData.pointerId == -1)
+        {
+            _horizontalMovement.HorizontalButtons(+1);
+        }
     }
 }

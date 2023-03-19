@@ -9,22 +9,15 @@ public class MovingButton : MonoBehaviour, IPointerClickHandler
     private int _vertical;
     private GameObject[,] _dataCell;
 
+    [SerializeField] private MovementButtons _mvovementButtons;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.pointerId == -1)
         {
             //_horizontal = ((int)gameObject.transform.position.x);
-            _vertical = ((int)gameObject.transform.position.z);
-            _dataCell = GameMenejer.instance.dataCell;
-            
-            for (int i = 0; i < 8; i++)
-            {
-                var objectCell = _dataCell[_vertical, i];
-                if (objectCell.GetComponent<VarreorEntety>())
-                {
-                    objectCell.GetComponent<VarreorEntety>().Muving();
-                }
-            }
+            _mvovementButtons.ButtonsMovement();
+            GameMenejer.instance.MuvePlayerOff();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameMenejer : MonoBehaviour
 {
@@ -24,7 +25,18 @@ public class GameMenejer : MonoBehaviour
    private SpawnPointEntityPlayer[] _spawnPlayer;
    private ClickReceiver[] _clickReceivers;
    
-   private int _step;
+   //вторая фаза
+   
+   [SerializeField] private MovementButtons _movementButtons;
+   [SerializeField] private HorizontalMovement _horizontalMovement;
+   public bool canMuvePlayer;
+   
+   //конопки перемещения
+   [SerializeField] private RightBatton _rightBatton;
+   [SerializeField] private LeftButton _leftButton;
+   [SerializeField] private MovingButton _movingButton;
+      
+      private int _step;
 
    private void Awake()
    {
@@ -37,7 +49,6 @@ public class GameMenejer : MonoBehaviour
       if (instance == null)
       {
          instance = this;
-            
       }
       else if (instance == this)
       {
@@ -51,6 +62,11 @@ public class GameMenejer : MonoBehaviour
       if (_step < 5)
       {
          FirstPhase();
+      }
+
+      if (_step > 4 && _step < 9)
+      {
+         SecondPhase();
       }
       
    }
@@ -104,6 +120,54 @@ public class GameMenejer : MonoBehaviour
          }
          return;
       }
-      
+   }
+   
+   private void SecondPhase()
+   {
+      if (_step == 5)
+      {
+         MuvePlayerOn();
+      }
+
+      if (_step == 6)
+      {
+         MuveEnemy();
+      }
+
+      if (_step == 7)
+      {
+         MuvePlayerOn();
+      }
+
+      if (_step == 8)
+      {
+         MuveEnemy();
+      }
+   }
+
+   private void MuvePlayerOn()
+   {
+      _movingButton.gameObject.SetActive(true);
+      _rightBatton.gameObject.SetActive(true);
+      _leftButton.gameObject.SetActive(true);
+      Debug.Log("1");
+
+   }
+   public void MuvePlayerOff()
+   {
+      {
+         _movingButton.gameObject.SetActive(false);
+         _rightBatton.gameObject.SetActive(false);
+         _leftButton.gameObject.SetActive(false);
+         _step++;
+         Debug.Log("2");
+      }
+   }
+   private void MuveEnemy()
+   {
+      int x = Random.Range(-1,2);
+      _horizontalMovement.HorizontalButtons(x);
+      _movementButtons.ButtonsMovement();
+      _step++;
    }
 }
