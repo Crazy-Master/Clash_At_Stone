@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovingButton : MonoBehaviour, IPointerClickHandler
+public class MovingButton : MonoBehaviour, IPointerDownHandler
 {
     //private int _horizontal;
     private int _vertical;
@@ -11,14 +11,10 @@ public class MovingButton : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private MovementButtons _mvovementButtons;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerId == -1)
-        {
-            //_horizontal = ((int)gameObject.transform.position.x);
-            _mvovementButtons.ButtonsMovement();
+        _mvovementButtons.ButtonsMovement();
             GameMenejer.instance.MuvePlayerOff();
-        }
     }
 }
 

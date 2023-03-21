@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SpawnPointEntityPlayer : MonoBehaviour, IPointerClickHandler
+public class SpawnPointEntityPlayer : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private RowEntety _rowEntety;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerId == -1)
-        {
-            _rowEntety.SpawnEntety((int)gameObject.transform.position.x);
-        }
+        _rowEntety.SpawnEntety((int)gameObject.transform.position.x);
     }
 }

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LeftButton : MonoBehaviour, IPointerClickHandler
+public class LeftButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private HorizontalMovement _horizontalMovement;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerId == -1)
-        {
-            _horizontalMovement.HorizontalButtons(-1);
-        }
+        _horizontalMovement.HorizontalButtons(-1);
     }
 }

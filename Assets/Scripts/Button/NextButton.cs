@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NextButton : MonoBehaviour, IPointerClickHandler
+public class NextButton : MonoBehaviour, IPointerDownHandler
 {
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerId == -1)
-        {
-            GameMenejer.instance.DestroyObject();
-        }
+        GameMenejer.instance.DestroyObject();
     }
 }

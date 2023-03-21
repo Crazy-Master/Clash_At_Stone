@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClickReceiver : MonoBehaviour, IPointerClickHandler
+public class ClickReceiver : MonoBehaviour, IPointerDownHandler
 {
     private HorizontallyFifthStoneEnemy _horizontallyStoneEnemy;
     
@@ -11,12 +11,9 @@ public class ClickReceiver : MonoBehaviour, IPointerClickHandler
         _horizontallyStoneEnemy = gameObject.GetComponentInParent<HorizontallyFifthStoneEnemy>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerId == -1)
-        {
-            _horizontallyStoneEnemy.SpawnFiveLine(gameObject.transform.position + new Vector3(0,0.5f,0));
-        }
+        _horizontallyStoneEnemy.SpawnFiveLine(gameObject.transform.position + new Vector3(0,0.5f,0));
     }
 
    
