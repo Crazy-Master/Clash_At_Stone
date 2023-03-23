@@ -45,11 +45,13 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\Scripts\ClickReceiver.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+     <Compile Include="Assets\Fantasy UI\Samples\IconPreview.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\Scripts\Button\HorizontalMovement.cs" />
      <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityEnemy.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+     <Compile Include="Assets\Scripts\Interface\IPressingButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\Scripts\Button\MovingEnemy.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
@@ -57,12 +59,15 @@
      <Compile Include="Assets\Scripts\Timers\TimerWaiting.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+     <Compile Include="Assets\Scripts\Interface\ISpawnButton.cs" />
+     <Compile Include="Assets\KUBIKOS - World\Scripts\EnableCameraDepthInForward.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Round\RoundCounter.cs" />
      <Compile Include="Assets\Scripts\VarreorEntety.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+     <Compile Include="Assets\Scripts\SpawnObject.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
@@ -70,14 +75,17 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
      <Compile Include="Assets\Scripts\Button\LeftButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\Scripts\Swipe\SwipeTest.cs" />
      <Compile Include="Assets\Scripts\HorizontallyFifthStonePlayer.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
      <Compile Include="Assets\Scripts\Button\NextButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+     <Compile Include="Assets\Scripts\Interface\ISpawnObject.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
      <Compile Include="Assets\Scripts\SpawnStone.cs" />
      <Compile Include="Assets\Scripts\Button\MovingButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+     <Compile Include="Assets\Scripts\Swipe\Swipe.cs" />
      <Compile Include="Assets\Scripts\Button\RightBatton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
      <Compile Include="Assets\Scripts\Timers\TimerPlayer.cs" />
@@ -92,16 +100,12 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+     <Compile Include="Assets\Scripts\Swipe\SwipeHorizontalMovement.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityPlayer.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-     <Compile Include="Assets\KUBIKOS - World\Scripts\EnableCameraDepthInForward.cs" />
-     <Compile Include="Assets\Fantasy UI\Samples\IconPreview.cs" />
-     <Compile Include="Assets\Scripts\Interface\IPressingButton.cs" />
-     <Compile Include="Assets\Scripts\Interface\ISpawnButton.cs" />
-     <Compile Include="Assets\Scripts\Swipe\SwipeTest.cs" />
-     <Compile Include="Assets\Scripts\Swipe\Swipe.cs" />
-     <Compile Include="Assets\Scripts\Swipe\SwipeHorizontalMovement.cs" />
+     <Compile Include="Assets\Scripts\DragDrop.cs" />
+     <Compile Include="Assets\Scripts\ItemSlot.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\KUBIKOS - World\URP Support\Prefabs URP\Rocks\Green" />
      <Folder Include="Assets\KUBIKOS - World\Demo\Scenes" />
@@ -188,6 +192,7 @@
      <None Include="Assets\KUBIKOS - World\Shaders\Cloud_Shader.shader" />
      <Folder Include="Assets\KUBIKOS - World\Models\Clouds\Materials" />
      <Folder Include="Assets\KUBIKOS - World\Scripts" />
+     <Folder Include="Assets\Resources" />
      <Folder Include="Assets\Meshtint Free Boximon Cyclopes Mega Toon Series\Scenes" />
      <Folder Include="Assets\KUBIKOS - World\URP Support\Materials URP\Planes" />
      <Folder Include="Assets\KUBIKOS - World\Prefabs\Particles" />
@@ -221,6 +226,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <Folder Include="Assets\KUBIKOS - World\Textures" />
+     <Folder Include="Assets\Materials\Tile" />
      <Folder Include="Assets\KUBIKOS - World\Textures\Particle" />
      <Folder Include="Assets\KUBIKOS - World\Models\Rocks\Materials" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
@@ -268,8 +274,10 @@
      <None Include="Assets\KUBIKOS - World\URP Support\Shaders URP\Water_Shader.shader" />
      <Folder Include="Assets\Boximon Pack 04 Mega Toon Series\Textures" />
      <None Include="Assets\SimpleLowPolyNature\Shaders\SimpleWater.shader" />
+     <Folder Include="Assets\Prefab\Field" />
      <Folder Include="Assets\KUBIKOS - World\URP Support\Prefabs URP\TreesAndPlants" />
      <Folder Include="Assets\Scripts\Swipe" />
+     <Folder Include="Assets\Materials\Row" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <Folder Include="Assets\SimpleLowPolyNature\Scenes\SceneDemoAsset" />
      <Folder Include="Assets\Meshtint Free Boximon Fiery Mega Toon Series\Textures" />
@@ -544,6 +552,9 @@
      </Reference>
      <Reference Include="UnityEditor.UnityConnectModule">
      <HintPath>X:\Unity\2021.3.18f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+     </Reference>
+     <Reference Include="DOTween">
+     <HintPath>X:\Unity Projects\3D\Clash_At_Stone\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
      <HintPath>X:\Unity Projects\3D\Clash_At_Stone\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
@@ -994,6 +1005,10 @@
      </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{6050d7f3-bfbe-7beb-16a1-b3f87d20a45b}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

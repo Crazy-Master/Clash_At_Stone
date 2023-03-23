@@ -44,13 +44,18 @@ public class GameMenejer : MonoBehaviour
    
    //кнопка даллее
    [SerializeField] private GameObject _nextButton;
+   
+   //-------------------------------------
+   
+   [SerializeField] private GameObject[] _row = new GameObject[14];
+   
       
       private int _step;
 
    private void Awake()
    {
-      _spawnPlayer = _rowPlayer.GetComponentsInChildren<SpawnPointEntityPlayer>();
-      _clickReceivers = _spawnStoneFifthPlayer.GetComponentsInChildren<ClickReceiver>();
+     _spawnPlayer = _rowPlayer.GetComponentsInChildren<SpawnPointEntityPlayer>();
+     _clickReceivers = _spawnStoneFifthPlayer.GetComponentsInChildren<ClickReceiver>();
    }
 
    private void Start()
@@ -91,10 +96,8 @@ public class GameMenejer : MonoBehaviour
       {
          _spawnStoneFirst.StoneSpawn();
          _step++;
-         foreach (var clickReceivers in _spawnPlayer)
-         {
-            clickReceivers.GetComponent<SpawnPointEntityPlayer>().enabled = true;
-         }
+         
+         _row[0].SetActive(true);
          return;
       }
 
@@ -273,4 +276,18 @@ public class GameMenejer : MonoBehaviour
       dataCell = new GameObject[14, 8];
       _nextButton.SetActive(false);
    }
+
+   #region ObjectSpawn
+   public GameObject ObjectSpawn(Vector3 position, GameObject prefab)
+   {
+      if (position.z < 7)
+      {
+         dataCell[(int)position.z,(int)position.x] = Instantiate(prefab, position, Quaternion.identity);
+         return dataCell[(int)position.z, (int)position.x];
+      }
+      dataCell[(int)position.z,(int)position.x] = Instantiate(prefab, position, Quaternion.Euler(0, 180, 0));
+      return dataCell[(int)position.z, (int)position.x];
+   }
+   #endregion
+   
 }

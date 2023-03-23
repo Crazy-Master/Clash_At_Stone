@@ -1,18 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnStone : MonoBehaviour
 {
-    private int[] _horizontallyStoneArrey = new int [2] ;
+    private int _firstStone;
+    private int _secondStone;
     private GameObject _stone;
-
-    private void Update()
-    {
-       // if (Input.GetMouseButtonDown(1)) StoneSpawn();
-    }
+    private int _row;
+    
 
     public void StoneSpawn()
     {
@@ -20,31 +19,48 @@ public class SpawnStone : MonoBehaviour
         {
             _stone = GameMenejer.instance._stone;
         }
-        
         for (int i = 1; i < 5; i++)
         {
             HorizontallyStone();
-            var asd = GameMenejer.instance.dataCell;
-           asd[i,_horizontallyStoneArrey[0]] = Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i), Quaternion.identity);
-           asd[i+8,_horizontallyStoneArrey[0]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[0],0.7f,i+8), Quaternion.identity);
-           asd[i,_horizontallyStoneArrey[1]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i), Quaternion.identity);
-           asd[i+8,_horizontallyStoneArrey[1]] =  Instantiate(_stone, new Vector3(_horizontallyStoneArrey[1],0.7f,i+8), Quaternion.identity);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone, 0.7f, i), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone,0.7f,i+8), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.7f,i), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.7f,i+8), _stone);
         }
-        
     }
 
     private void HorizontallyStone()
     {
-        int  firstStone = Random.Range(0, 8);
-        int secondStone = 0;
+        var i = 0;
+        var e = 8;
+        if (_row == 2)
+        {
+            if (GameMenejer.instance.dataCell[2, 0] != null)
+                e = 7;
+            if (GameMenejer.instance.dataCell[2, 7] != null)
+                i = 1;
+        }
+        if (_row == 3)
+        {
+            if (GameMenejer.instance.dataCell[1, 0] != null)
+                e = 7;
+            if (GameMenejer.instance.dataCell[1, 7] != null)
+                i = 1;
+        }
+        _firstStone = Random.Range(i, e);
+        _secondStone = 0;
         int distance = 0;
         while (distance < 2 || distance > 4)
         {
-            secondStone = Random.Range(0, 8);
-            distance = Mathf.Abs(firstStone - secondStone)-1;
+            _secondStone = Random.Range(i, e);
+            distance = Mathf.Abs(_firstStone - _secondStone)-1;
         }
-
-        _horizontallyStoneArrey[0] = firstStone;
-        _horizontallyStoneArrey[1] = secondStone;
+            
+        if (_row == 3)
+        {
+            _row = 0;
+            return;
+        }
+        _row++;
     }
 }
