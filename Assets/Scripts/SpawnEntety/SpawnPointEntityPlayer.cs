@@ -9,6 +9,6 @@ public class SpawnPointEntityPlayer : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _rowEntety.SpawnEntety((int)gameObject.transform.position.x);
+        _rowEntety.SpawnEntety((int)gameObject.transform.position.x, GameMenejer.instance._entetyPlayers);
     }
 }

@@ -9,12 +9,13 @@ public class HorizontallyFifthStonePlayer : MonoBehaviour
     private GameObject _stone;
     
 
-    public void StoneSpawn()
+    public bool StoneSpawn()
     {
         HorizontallyStone();
         _stone = GameMenejer.instance._stone;
-        GameMenejer.instance.dataCell[5,_firstStone] = Instantiate(_stone, new Vector3(_firstStone,0.7f,5), Quaternion.identity);
-        GameMenejer.instance.dataCell[5,_secondStone] = Instantiate(_stone, new Vector3(_secondStone,0.7f,5), Quaternion.identity);
+        GameMenejer.instance.dataCell[5,_firstStone] = Instantiate(_stone, new Vector3(_firstStone,0,5), Quaternion.identity);
+        GameMenejer.instance.dataCell[5,_secondStone] = Instantiate(_stone, new Vector3(_secondStone,0,5), Quaternion.identity);
+        return true;
     } 
     private void HorizontallyStone() 
     {

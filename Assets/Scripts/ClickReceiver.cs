@@ -13,7 +13,7 @@ public class ClickReceiver : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _horizontallyStoneEnemy.SpawnFiveLine(gameObject.transform.position + new Vector3(0,0.5f,0));
+        _horizontallyStoneEnemy.SpawnFiveLine(gameObject.transform.position + new Vector3(0,0,0));
     }
 
    

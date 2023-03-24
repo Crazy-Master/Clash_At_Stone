@@ -22,10 +22,10 @@ public class SpawnStone : MonoBehaviour
         for (int i = 1; i < 5; i++)
         {
             HorizontallyStone();
-            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone, 0.7f, i), _stone);
-            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone,0.7f,i+8), _stone);
-            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.7f,i), _stone);
-            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.7f,i+8), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone, 0.2f, i), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_firstStone,0.2f,i+8), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.2f,i), _stone);
+            GameMenejer.instance.ObjectSpawn(new Vector3(_secondStone,0.2f,i+8), _stone);
         }
     }
 

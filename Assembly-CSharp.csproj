@@ -47,6 +47,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\Fantasy UI\Samples\IconPreview.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+     <Compile Include="Assets\Scripts\DragDrop.cs" />
      <Compile Include="Assets\Scripts\Button\HorizontalMovement.cs" />
      <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityEnemy.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
@@ -78,6 +79,7 @@
      <Compile Include="Assets\Scripts\Swipe\SwipeTest.cs" />
      <Compile Include="Assets\Scripts\HorizontallyFifthStonePlayer.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+     <Compile Include="Assets\Scripts\ItemSlot.cs" />
      <Compile Include="Assets\Scripts\Button\NextButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\Scripts\Interface\ISpawnObject.cs" />
@@ -103,9 +105,8 @@
      <Compile Include="Assets\Scripts\Swipe\SwipeHorizontalMovement.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Scripts\SpawnEntety\SpawnPointEntityPlayer.cs" />
+     <Compile Include="Assets\Scripts\EntetyPlayrs.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-     <Compile Include="Assets\Scripts\DragDrop.cs" />
-     <Compile Include="Assets\Scripts\ItemSlot.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\KUBIKOS - World\URP Support\Prefabs URP\Rocks\Green" />
      <Folder Include="Assets\KUBIKOS - World\Demo\Scenes" />
@@ -165,6 +166,7 @@
      <Folder Include="Assets\KUBIKOS - World\Demo\Scenes\Demo3" />
      <Folder Include="Assets\Scripts" />
      <Folder Include="Assets\SimpleLowPolyNature\Scenes\PrefabsScene" />
+     <Folder Include="Assets\Fantasy UI\PNG\Materials" />
      <Folder Include="Assets\KUBIKOS - World\Models\Particle\Materials" />
      <Folder Include="Assets\KUBIKOS - World\Textures\Rocks" />
      <Folder Include="Assets\KUBIKOS - World\Models\TreesAndPlants\Materials" />

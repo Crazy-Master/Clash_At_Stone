@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class TimerPlayer : MonoBehaviour
 {
-    [SerializeField] private float _time = 15;
+    [SerializeField] private float _time = 20;
     private float _timer;
     private bool _canT;
-    [SerializeField] private GameObject _timerButton;
+    //[SerializeField] private GameObject _timerButton;
     private int _timerInt;
     [SerializeField] private TextMeshProUGUI _timerText;
-    
+
     private void  FixedUpdate()
     {
         if (_canT)
@@ -21,8 +21,13 @@ public class TimerPlayer : MonoBehaviour
             _timerInt = (int)_timer;
             //var strText = _timerButton.GetComponentInChildren<TextMeshProUGUI>();
             _timerText.text = _timerInt.ToString();
+            if (_timer < 6 && _timerText.color == Color.white)
+            {
+                _timerText.color = Color.red; 
+            }
             return;
         }
+        _timerText.color = Color.white;
         _timerText.text = ("-");
     }
 
@@ -47,5 +52,4 @@ public class TimerPlayer : MonoBehaviour
         _canT = false;
         _timer = 0;
     }
-    
 }

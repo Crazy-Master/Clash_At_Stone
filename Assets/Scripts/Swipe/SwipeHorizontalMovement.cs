@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class SwipeHorizontalMovement : MonoBehaviour
 {
-    public Swipe swipeControls;
+    [SerializeField] private Swipe _swipeControls;
     private Vector3 _desiredPosition;
 
     [SerializeField] private HorizontalMovement _horizontalMovement;
+    [SerializeField] private MovementButtons _movementButtons;
     
     private void Update()
     {
-        if (swipeControls.SwipeLeft) 
+        if (_swipeControls.SwipeLeft) 
             _horizontalMovement.HorizontalButtons(-1);
-        if (swipeControls.SwipeRight) 
+        if (_swipeControls.SwipeRight) 
             _horizontalMovement.HorizontalButtons(+1);
-        if (swipeControls.SwipeUp) 
-            GameMenejer.instance.MuvePlayerOff();
+        if (_swipeControls.SwipeUp)
+        {
+            gameObject.SetActive(false);
+            _movementButtons.ButtonsMovement();
+            GameMenejer.instance.MuvePlayer();
+        }
     }
 }

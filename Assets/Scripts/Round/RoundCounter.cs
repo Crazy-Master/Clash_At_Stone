@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoundCounter : MonoBehaviour
 {
@@ -16,17 +17,17 @@ public class RoundCounter : MonoBehaviour
         {
             if (winner == 1)
             {
-                _indicatorRoundFirst.GetComponent<Renderer>().material.color = Color.green;
+                _indicatorRoundFirst.GetComponent<Image>().color = Color.green;
                 _counter++;
             }
             if (winner == 2)
             {
-                _indicatorRoundFirst.GetComponent<Renderer>().material.color = Color.red;
+                _indicatorRoundFirst.GetComponent<Image>().color = Color.red;
                 _counter--;
             }
             if (winner == 3)
             {
-                _indicatorRoundFirst.GetComponent<Renderer>().material.color = Color.yellow;
+                _indicatorRoundFirst.GetComponent<Image>().color = Color.yellow;
             }
             _roundNumber++;
             return;
@@ -35,18 +36,18 @@ public class RoundCounter : MonoBehaviour
         {
             if (winner == 1)
             {
-                _indicatorRoundSecond.GetComponent<Renderer>().material.color = Color.green;
+                _indicatorRoundSecond.GetComponent<Image>().color = Color.green;
                 _counter++;
             }
 
             if (winner == 2)
             {
-                _indicatorRoundSecond.GetComponent<Renderer>().material.color = Color.red;
+                _indicatorRoundSecond.GetComponent<Image>().color = Color.red;
                 _counter--;
             }
             if (winner == 3)
             {
-                _indicatorRoundSecond.GetComponent<Renderer>().material.color = Color.yellow;
+                _indicatorRoundSecond.GetComponent<Image>().color = Color.yellow;
             }
             _roundNumber++;
             return;
@@ -55,18 +56,18 @@ public class RoundCounter : MonoBehaviour
         {
             if (winner == 1)
             {
-                _IndicatorRoundThird.GetComponent<Renderer>().material.color = Color.green;
+                _IndicatorRoundThird.GetComponent<Image>().color = Color.green;
                 _counter++;
             }
 
             if (winner == 2)
             {
-                _IndicatorRoundThird.GetComponent<Renderer>().material.color = Color.red;
+                _IndicatorRoundThird.GetComponent<Image>().color = Color.red;
                 _counter--;
             }
             if (winner == 3)
             {
-                _IndicatorRoundThird.GetComponent<Renderer>().material.color = Color.yellow;
+                _IndicatorRoundThird.GetComponent<Image>().color = Color.yellow;
             }
             _roundNumber++;
             GameEnd();
@@ -76,18 +77,19 @@ public class RoundCounter : MonoBehaviour
     private void GameEnd()
     {
         if (_counter > 0)
-            Debug.Log("---VICTORY---");
+            GameMenejer.instance.victory.SetActive(true);
         else
-            Debug.Log("---GAME OVER---");
+            GameMenejer.instance.gameOver.SetActive(true);
+        GameMenejer.instance._nextButton.SetActive(true);
     }
 
     public void ResetColor()
     {
         if (_roundNumber == 3)
         {
-            _indicatorRoundFirst.GetComponent<Renderer>().material.color = Color.cyan;
-            _indicatorRoundSecond.GetComponent<Renderer>().material.color = Color.cyan;
-            _IndicatorRoundThird.GetComponent<Renderer>().material.color = Color.cyan;
+            _indicatorRoundFirst.GetComponent<Image>().color = Color.cyan;
+            _indicatorRoundSecond.GetComponent<Image>().color = Color.cyan;
+            _IndicatorRoundThird.GetComponent<Image>().color = Color.cyan;
             _roundNumber = 0;
         }
     }

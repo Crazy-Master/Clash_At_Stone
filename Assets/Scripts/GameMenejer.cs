@@ -11,12 +11,15 @@ public class GameMenejer : MonoBehaviour
    public GameObject[,] dataCell = new GameObject[14,8];
    public GameObject _stone;
    public GameObject _enemy;
-   public Transform _rowEntetyEnemy;
-   public Transform _rowEntetyPlayr;
+   public GameObject _entetyPlayers;
+   public Transform _rowEntety;
 
    public bool _fifthStone;
    
    // первая фаза
+   private bool _nextStep;
+   [SerializeField] private float _timeNextStep = 1f;
+   
    [SerializeField] private RowEntety _spawnEnemy;
    [SerializeField] private SpawnStone _spawnStoneFirst;
    [SerializeField] private HorizontallyFifthStonePlayer _spawnStoneFifthBot;
@@ -24,26 +27,27 @@ public class GameMenejer : MonoBehaviour
    [SerializeField] private RowEntety _rowPlayer;
    private SpawnPointEntityPlayer[] _spawnPlayer;
    private ClickReceiver[] _clickReceivers;
-   
+
    [SerializeField] private TimerPlayer _timerPlayer;
-   [SerializeField] private TimerWaiting _timerWaiting;
-   
+
    //вторая фаза
    
    [SerializeField] private MovementButtons _movementButtons;
    [SerializeField] private HorizontalMovement _horizontalMovement;
    public bool canMuvePlayer;
+
+   private bool _timerGo;
    
    //конопки перемещения
-   [SerializeField] private RightBatton _rightBatton;
-   [SerializeField] private LeftButton _leftButton;
-   [SerializeField] private MovingButton _movingButton;
-   
+   public GameObject _swipeObject; //сделать инкапсуляцию
+
    //счетчик раундов
    [SerializeField] private RoundCounter _roundCounter;
    
    //кнопка даллее
-   [SerializeField] private GameObject _nextButton;
+   public GameObject _nextButton;
+   public GameObject gameOver;
+   public GameObject victory;
    
    //-------------------------------------
    
@@ -79,7 +83,7 @@ public class GameMenejer : MonoBehaviour
          FirstPhase();
       }
 
-      if (_step > 4 && _step < 12)
+      if (_step is > 4 and < 12)
       {
          SecondPhase();
       }
@@ -92,140 +96,189 @@ public class GameMenejer : MonoBehaviour
 
    private void FirstPhase()
    {
-      if (_step == 0) //ставится 1-4 ряд стен
+      //ставится 1-4 ряд стен
+      if (_step == 0) 
       {
          _spawnStoneFirst.StoneSpawn();
          _step++;
-         
          _row[0].SetActive(true);
          return;
       }
-
-      if (_step == 1) //игрок ставит воинов
+      
+      //игрок ставит воинов
+      if (_step == 1) 
       {
          _step += _rowPlayer.ArrayIsFilled();
+         return;
       }
 
-      if (_step == 2) //враг ставит воинов
+      //враг ставит воинов
+      if (_step == 2) 
       {
-         _spawnEnemy.gameObject.GetComponent<SpawnPointEntityEnemy>().SpawnEntetyEnemy();
-         _step++;
-         foreach (var clickReceivers in _spawnPlayer)
+         if (_row[0].activeSelf)
          {
-            clickReceivers.GetComponent<SpawnPointEntityPlayer>().enabled = false;
+            _row[0].SetActive(false); 
+            _nextStep = _spawnEnemy.gameObject.GetComponent<SpawnPointEntityEnemy>().SpawnEntetyEnemy();
          }
-         
-         foreach (var clickReceivers in _clickReceivers)
+         if (_nextStep)
          {
-            clickReceivers.GetComponent<ClickReceiver>().enabled = true;
+            Invoke(nameof(NextStep), _timeNextStep);
+            _nextStep = false;
          }
          return;
       }
 
-      if (_step == 3)  //игрок ставит 5-й ряд стен со стороны бота
+      //игрок ставит 5-й ряд стен со стороны бота
+      if (_step == 3) 
       {
+         if (_row[8].activeSelf == false) 
+            _row[8].SetActive(true); 
          _step += _spawnStoneFifthPlayer.ArrayIsFilled();
       }
       
-      if (_step == 4) //враг ставит 5-й ряд стен со стороны игрока
+      //враг ставит 5-й ряд стен со стороны игрока
+      if (_step == 4)
       {
-         _spawnStoneFifthBot.StoneSpawn();
-         _step++;
-         foreach (var clickReceivers in _clickReceivers)
+         if (_row[8].activeSelf)
          {
-            clickReceivers.GetComponent<ClickReceiver>().enabled = false;
+            _row[8].SetActive(false);
+            _nextStep = _spawnStoneFifthBot.StoneSpawn();
          }
-         return;
+         if (_nextStep)
+         {
+            Invoke(nameof(NextStep), _timeNextStep);
+            _nextStep = false;
+         }
       }
    }
    
  
    private void SecondPhase()
    {
+      //ход игрока
       if (_step == 5)
       {
-         MuvePlayerOn();
-         if (_timerPlayer.Timer() == 1)
+         if (_row[1].activeSelf == false)
+         {
+            _row[1].SetActive(true);
+            _swipeObject.SetActive(true);
+            _timerGo = true;
+         } 
+         if (_timerPlayer.Timer() == 1 && _timerGo)
          {
             _movementButtons.ButtonsMovement();
-            MuvePlayerOff();
+            MuvePlayer();
          }
+         _nextStep = true; //для след хода
          return;
       }
 
+      //ход бота
       if (_step == 6)
       {
-         MuveEnemy();
-         return;
-      }
-
-      if (_step == 7)
-      {
-         MuvePlayerOn();
-         if (_timerPlayer.Timer() == 1)
+         if (_nextStep)
          {
-            _movementButtons.ButtonsMovement();
-            MuvePlayerOff();
+            MuveEnemy();
+            _nextStep = false;
          }
          return;
       }
 
+      //ход игрока
+      if (_step == 7)
+      {
+         if (_row[3].activeSelf == false)
+         {
+            _row[3].SetActive(true);
+            _swipeObject.SetActive(true);
+            _timerGo = true;
+         } 
+         if (_timerPlayer.Timer() == 1 && _timerGo)
+         {
+            _movementButtons.ButtonsMovement();
+            MuvePlayer();
+         }
+         _nextStep = true; //для след хода
+         return;
+      }
+
+      //ход бота
       if (_step == 8)
       {
-         MuveEnemy();
+         if (_nextStep)
+         {
+            MuveEnemy();
+            _nextStep = false;
+         }
          return;
       }
       
+      // авто-ход
       if (_step == 9)
       {
-         _movementButtons.ButtonsMovement();
-         _step++;
+         if (_nextStep == false)
+         {
+            _movementButtons.ButtonsMovement();
+            Invoke(nameof(NextStep), _timeNextStep);
+            _nextStep = true;
+         }
          return;
       }
       
+      // авто-ход
       if (_step == 10)
       {
-         _movementButtons.ButtonsMovement();
-         _step++;
+         if (_nextStep)
+         {
+            _movementButtons.ButtonsMovement();
+            Invoke(nameof(NextStep), _timeNextStep);
+            _nextStep = false;
+         }
          return;
       }
       
+      // бой
       if (_step == 11)
       {
          Battle();
-         _step++;
-         _nextButton.SetActive(true);
       }
    }
-
-   private void MuvePlayerOn()
-   {
-      _movingButton.gameObject.SetActive(true);
-      _rightBatton.gameObject.SetActive(true);
-      _leftButton.gameObject.SetActive(true);
-
+   
+   public void MuvePlayer()
+   { 
+      _row[1].SetActive(false);
+      _row[3].SetActive(false);
+      _swipeObject.SetActive(false);
+      _timerPlayer.TimerRemove();
+      _timerGo = false;
    }
-   public void MuvePlayerOff()
-   {
-      {
-         _movingButton.gameObject.SetActive(false);
-         _rightBatton.gameObject.SetActive(false);
-         _leftButton.gameObject.SetActive(false);
-         _timerPlayer.TimerRemove();
-         _step++;
-      }
-   }
+   
+   
+   #region MuveEnemy
    private void MuveEnemy()
    {
       int x = Random.Range(-1,2);
       _horizontalMovement.HorizontalButtons(x);
-      _horizontalMovement.HorizontalButtons(x);
-      _movementButtons.ButtonsMovement();
-      _step++;
+      if (x != 0)
+      {
+         Invoke(nameof(MovementEnemy), 1);
+         return;
+      }
+      MovementEnemy();
    }
+   private void MovementEnemy()
+   {
+      _movementButtons.ButtonsMovement();
+   }
+   #endregion
 
+   #region Battle
    private void Battle()
    {
+      _step++;
+      //_nextButton.SetActive(true);
+      DestroyObject();
+      
       var powerPlaer = 0;
       var powerEnemy = 0;
       for (int i = 0; i < 8; i++)
@@ -256,7 +309,9 @@ public class GameMenejer : MonoBehaviour
       Debug.Log("ничья");
       _roundCounter.Counter(3);
    }
+   #endregion
 
+   #region DestroyObject
    public void DestroyObject()
    {
       _step = 0;
@@ -275,7 +330,12 @@ public class GameMenejer : MonoBehaviour
       _roundCounter.ResetColor();  // сброс цветов с счетчика раундов
       dataCell = new GameObject[14, 8];
       _nextButton.SetActive(false);
+      victory.SetActive(false);
+      gameOver.SetActive(false);
+      _nextStep = false;
+      _timerGo = false;
    }
+   #endregion
 
    #region ObjectSpawn
    public GameObject ObjectSpawn(Vector3 position, GameObject prefab)
@@ -290,4 +350,19 @@ public class GameMenejer : MonoBehaviour
    }
    #endregion
    
+   #region NextStepTimer
+   public void NextStepTimer(float time)
+   {
+      MuvePlayer();
+      Invoke(nameof(NextStep), time);
+   }
+   #endregion
+   
+   #region NextStep
+   private void NextStep()
+   {
+      _step++;
+      CancelInvoke();
+   }
+   #endregion
 }

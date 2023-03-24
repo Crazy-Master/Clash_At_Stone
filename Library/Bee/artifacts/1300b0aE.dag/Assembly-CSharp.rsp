@@ -359,6 +359,7 @@
 "Assets/Scripts/Button/RightBatton.cs"
 "Assets/Scripts/ClickReceiver.cs"
 "Assets/Scripts/DragDrop.cs"
+"Assets/Scripts/EntetyPlayrs.cs"
 "Assets/Scripts/GameEntity.cs"
 "Assets/Scripts/GameMenejer.cs"
 "Assets/Scripts/HorizontallyFifthStoneEnemy.cs"
