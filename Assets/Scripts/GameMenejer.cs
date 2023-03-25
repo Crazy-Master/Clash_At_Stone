@@ -48,6 +48,10 @@ public class GameMenejer : MonoBehaviour
    public GameObject _nextButton;
    public GameObject gameOver;
    public GameObject victory;
+
+   public AudioSource backgroundMusic;
+   private AudioSource audioSource;
+   [SerializeField] private AudioClip battelClip;
    
    //-------------------------------------
    
@@ -73,6 +77,7 @@ public class GameMenejer : MonoBehaviour
          Destroy(gameObject);
       }
       DontDestroyOnLoad(gameObject);
+      audioSource = GetComponent<AudioSource>();
    }
 
    private void FixedUpdate()
@@ -161,10 +166,8 @@ public class GameMenejer : MonoBehaviour
          if (_row[1].activeSelf == false)
          {
             _row[1].SetActive(true);
-            _swipeObject.SetActive(true);
-            _timerGo = true;
          } 
-         if (_timerPlayer.Timer() == 1 && _timerGo)
+         if (_timerPlayer.timer <= 0)
          {
             _movementButtons.ButtonsMovement();
             MuvePlayer();
@@ -190,10 +193,8 @@ public class GameMenejer : MonoBehaviour
          if (_row[3].activeSelf == false)
          {
             _row[3].SetActive(true);
-            _swipeObject.SetActive(true);
-            _timerGo = true;
          } 
-         if (_timerPlayer.Timer() == 1 && _timerGo)
+         if (_timerPlayer.timer <= 0)
          {
             _movementButtons.ButtonsMovement();
             MuvePlayer();
@@ -250,7 +251,6 @@ public class GameMenejer : MonoBehaviour
       _row[3].SetActive(false);
       _swipeObject.SetActive(false);
       _timerPlayer.TimerRemove();
-      _timerGo = false;
    }
    
    
@@ -276,9 +276,28 @@ public class GameMenejer : MonoBehaviour
    private void Battle()
    {
       _step++;
-      //_nextButton.SetActive(true);
-      DestroyObject();
+      if (battelClip != null)
+         PlaySound(battelClip);
       
+      Invoke(nameof(BattlePhase), 3.5f);
+      
+      for (int i = 0; i < 8; i++)
+      {
+         if (dataCell[6, i] != null)
+         {
+            dataCell[6, i].GetComponent<VarreorEntety>().Battle();
+         }
+         if (dataCell[7, i] != null)
+         {
+            dataCell[7, i].GetComponent<VarreorEntety>().Battle();
+         }
+      }
+   }
+
+   private void BattlePhase()
+   {
+      //_nextButton.SetActive(true);
+      audioSource.Stop();
       var powerPlaer = 0;
       var powerEnemy = 0;
       for (int i = 0; i < 8; i++)
@@ -295,18 +314,15 @@ public class GameMenejer : MonoBehaviour
 
       if (powerPlaer > powerEnemy)
       {
-         Debug.Log("победил Plaer");
          _roundCounter.Counter(1); //1- победил игрок, 2- победил врак, 3- ничья
          return;
       }
 
       if (powerPlaer < powerEnemy)
       {
-         Debug.Log("победил Enemy");
          _roundCounter.Counter(2);
          return;
       }
-      Debug.Log("ничья");
       _roundCounter.Counter(3);
    }
    #endregion
@@ -334,6 +350,7 @@ public class GameMenejer : MonoBehaviour
       gameOver.SetActive(false);
       _nextStep = false;
       _timerGo = false;
+      audioSource.Stop();
    }
    #endregion
 
@@ -361,8 +378,21 @@ public class GameMenejer : MonoBehaviour
    #region NextStep
    private void NextStep()
    {
+      if (_step == 4 || _step == 6)
+      {
+         _timerPlayer.TimerGo();
+         _swipeObject.SetActive(true);
+      }
       _step++;
       CancelInvoke();
+   }
+   #endregion
+   
+   #region PlaySound
+
+   public void PlaySound(AudioClip clip)
+   {
+   audioSource.PlayOneShot(clip);   
    }
    #endregion
 }

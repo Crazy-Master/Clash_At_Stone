@@ -31,7 +31,6 @@ public class RowEntety : MonoBehaviour
         {
             Destroy(_entetyArrey[horizontal]);
             _entetyArrey[horizontal] = null;
-            Debug.Log(_entetyArrey[horizontal]);
             _filledCells--;
         }
     }
@@ -51,6 +50,6 @@ public class RowEntety : MonoBehaviour
         }
         return 0;
     }
-    
+
     
 }

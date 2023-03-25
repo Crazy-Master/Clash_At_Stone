@@ -11,6 +11,9 @@ public class RoundCounter : MonoBehaviour
     private int _counter;
     private int _roundNumber = 0;
     
+    [SerializeField] private AudioClip collectedClipVictory;
+    [SerializeField] private AudioClip collectedClipGameOver;
+    
     public void Counter(int winner)
     {
         if (_roundNumber == 0)
@@ -30,6 +33,8 @@ public class RoundCounter : MonoBehaviour
                 _indicatorRoundFirst.GetComponent<Image>().color = Color.yellow;
             }
             _roundNumber++;
+            //Invoke(nameof(DestroyObject), 2f);
+            GameMenejer.instance.DestroyObject();
             return;
         }
         if (_roundNumber == 1)
@@ -50,6 +55,8 @@ public class RoundCounter : MonoBehaviour
                 _indicatorRoundSecond.GetComponent<Image>().color = Color.yellow;
             }
             _roundNumber++;
+            //Invoke(nameof(DestroyObject), 2f);
+            GameMenejer.instance.DestroyObject();
             return;
         }
         if (_roundNumber == 2)
@@ -77,9 +84,15 @@ public class RoundCounter : MonoBehaviour
     private void GameEnd()
     {
         if (_counter > 0)
-            GameMenejer.instance.victory.SetActive(true);
+        {
+            GameMenejer.instance.victory.SetActive(true);  
+            GameMenejer.instance.PlaySound(collectedClipVictory);
+        }
         else
+        {
             GameMenejer.instance.gameOver.SetActive(true);
+            GameMenejer.instance.PlaySound(collectedClipGameOver);
+        }
         GameMenejer.instance._nextButton.SetActive(true);
     }
 
@@ -93,4 +106,9 @@ public class RoundCounter : MonoBehaviour
             _roundNumber = 0;
         }
     }
+    
+    // private void DestroyObject()
+    // {
+    //     GameMenejer.instance.DestroyObject();
+    // }
 }

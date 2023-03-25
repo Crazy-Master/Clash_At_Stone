@@ -7,6 +7,7 @@ public class HorizontalMovement : MonoBehaviour
 {
     private GameObject[,] _dataCell;
     private float _moveTime = 0.7f;
+    [SerializeField] private AudioClip collectedClip;
     
     public void HorizontalButtons(int side)
     {
@@ -17,6 +18,8 @@ public class HorizontalMovement : MonoBehaviour
         {
             if (_dataCell[objectZ, 0] == null && _dataCell[objectZOver, 0] == null)
             {
+                GameMenejer.instance.PlaySound(collectedClip);
+                
                 for (int i = 0; i < 7; i++)
                 {
                     _dataCell[objectZ, i] = _dataCell[objectZ, i + 1];
@@ -44,6 +47,8 @@ public class HorizontalMovement : MonoBehaviour
         {
             if (_dataCell[objectZ, 7] == null && _dataCell[objectZOver, 7] == null)
             {
+                GameMenejer.instance.PlaySound(collectedClip);
+                
                 for (int i = 7; i > 0; i--)
                 {
                     _dataCell[objectZ, i] = _dataCell[objectZ, i - 1];

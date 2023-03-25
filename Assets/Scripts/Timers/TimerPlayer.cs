@@ -8,6 +8,7 @@ public class TimerPlayer : MonoBehaviour
 {
     [SerializeField] private float _time = 20;
     private float _timer;
+    public float timer => _time;
     private bool _canT;
     //[SerializeField] private GameObject _timerButton;
     private int _timerInt;
@@ -15,7 +16,7 @@ public class TimerPlayer : MonoBehaviour
 
     private void  FixedUpdate()
     {
-        if (_canT)
+        if (_canT && _timer > 0)
         {
             _timer = _timer - Time.deltaTime;
             _timerInt = (int)_timer;
@@ -31,22 +32,28 @@ public class TimerPlayer : MonoBehaviour
         _timerText.text = ("-");
     }
 
-    public int Timer()
-    {
-        if (_canT && _timer <= 0)
-        {
-            _canT = false;
-            return 1;
-        }
-        if (!_canT)
-        {
-            _timer = _time;
-            _canT = true;
-            return 0;
-        }
-        return 0;
-    }
+    // public int Timer()
+    // {
+    //     if (_canT && _timer <= 0)
+    //     {
+    //         _canT = false;
+    //         return 1;
+    //     }
+    //     if (!_canT)
+    //     {
+    //         _timer = _time;
+    //         _canT = true;
+    //         return 0;
+    //     }
+    //     return 0;
+    // }
 
+    public void TimerGo()
+    {
+        _timer = _time;
+        _canT = true;
+    }
+    
     public void TimerRemove()
     {
         _canT = false;
